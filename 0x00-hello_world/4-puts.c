@@ -1,6 +1,6 @@
 #include <stdio.h>
 /**
- * "My first c programming
+ * "My first c programming"
  * main - prints "Programming is like building a multilingual puzzle
  * Return: Always 0
 */
