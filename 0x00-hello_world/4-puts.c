@@ -1,7 +1,8 @@
 #include <stdio.h>
 /**
- * My first c programming
- * Return: 0
+ * "My first c programming
+ * main - prints "Programming is like building a multilingual puzzle
+ * Return: Always 0
 */
 
 int main(void)
