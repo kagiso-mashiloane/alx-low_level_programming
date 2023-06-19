@@ -1,9 +1,9 @@
 #include <stdio.h>
 /**
- *  *main-Entry point
- *   *@void:Null value
- *    *Description:Print alphabet  except q and e
- *     *Return:Always 0(sucess)
+ *main-Entry point
+ *@void:Null value
+ *Description:Print alphabet  except q and e
+ *Return:Always 0(sucess)
  */
 int main(void)
 {
@@ -13,8 +13,8 @@ int main(void)
 	{
 		if (i == 101 || i == 113)
 		{
-			continue;
 			i++;
+			continue;
 		}
 		putchar(i);
 		i++;
