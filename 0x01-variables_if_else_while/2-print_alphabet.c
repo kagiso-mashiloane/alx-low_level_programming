@@ -1,18 +1,18 @@
 #include <stdio.h>
 /**
- * main- Entry point
- * @void: Null value
- * Description: Print alphabet lowercase
- * Return: Zero value
+ *main-Entry point
+ *@void:Null value
+ *Description:Print alphabet lowercase
+ *Return:Always 0(sucess)
  */
 int main(void)
 {
-	char alp[26] = "abcdefghigklmnopqrstuvwxyz";
-	int i;
+	char i = 'a';
 
-	for (i = 0; i < 26; i++)
+	while (i <= 'z')
 	{
-		putchar(alp[i]);
+	putchar(i);
+	i++;
 	}
 	putchar('\n');
 	return (0);
