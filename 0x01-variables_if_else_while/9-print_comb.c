@@ -2,7 +2,7 @@
 /**
  *main- Entry point
  *@void: Null value
- *Description: prints all possible combinations of single-digit numbers.
+ *Description: 'prints all possible combinations of single-digit numbers.'
  *Return: Zero value
  */
 int main(void)
@@ -12,6 +12,11 @@ int main(void)
 	for (n = 48; n <= 57; n++)
 	{
 		putchar(n);
+		if (n == 57)
+		{
+			n++;
+			continue;
+		}
 		putchar(',');
 		putchar(' ');
 	}
