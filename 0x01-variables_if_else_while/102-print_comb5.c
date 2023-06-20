@@ -7,29 +7,32 @@
  */
 int main(void)
 {
-	int i = 0;
-	int j;
-	int count = 0;
+	int i, j, k, l;
+	int count, count1;
 
-	while (i <= 98)
+	for (count = 0; count <= 99; count++)
 	{
-		j = i + 1;
-		while (j <= 99)
+		i = count / 10;
+		j = count % 10;
+		for (count1 = 0; count1 <= 99; count++)
 		{
-			putchar((i / 10) + '0');
-			putchar((i % 10) + '0');
+		k = count1 / 10;
+		l = count1 % 10;
+
+		if (i < k || (i == k && j < l))
+		{
+			putchar(i + '0');
+			putchar(j + '0');
 			putchar(' ');
-			putchar((j / 10) + '0');
-			putchar((j / 10) + '0');
-			if (count != 4949)
+			putchar(k + '0');
+			putchar(l + '0');
+			if (!(i == 9 && j == 8))
 			{
 				putchar(',');
 				putchar(' ');
 			}
-			j++;
-			count++;
 		}
-		i++;
+		}
 	}
 	putchar('\n');
 	return (0);
