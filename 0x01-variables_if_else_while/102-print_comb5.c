@@ -2,7 +2,7 @@
 /**
  * main- Entry point
  * @void: Null value
- * Description: Print numbers shoud range from 0 to 99
+ * Description: 'Print numbers shoud range from 0 to 99'
  * Return: Zero value
  */
 int main(void)
@@ -13,7 +13,7 @@ int main(void)
 
 	while (i <= 98)
 	{
-		j + i + 1;
+		j = i + 1;
 		while (j <= 99)
 		{
 			putchar((i / 10) + '0');
