@@ -2,124 +2,171 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
+
 /**
- * _is_zero - determines if any number is zero
- * @argv: argument vector.
- *
- * Return: no return.
+ * add_arrays - adds two arrays of integers
+ * @arr1: pointer to the array with the numbers from product
+ * @arr2: pointer to the array with the numbers of total sum
+ * @len_arrays: length of both arrays
+ * Return: void
  */
-void _is_zero(char *argv[])
+
+void add_arrays(int *arr1, int *arr2, int len_arrays)
 {
-	int i, isn1 = 1, isn2 = 1;
+	int i = 0;
+	int sum;
+	int carry = 0;
+	int index_arrays = len_arrays - 1;
 
-	for (i = 0; argv[1][i]; i++)
-		if (argv[1][i] != '0')
-		{
-			isn1 = 0;
-			break;
-		}
-
-	for (i = 0; argv[2][i]; i++)
-		if (argv[2][i] != '0')
-		{
-			isn2 = 0;
-			break;
-		}
-
-	if (isn1 == 1 || isn2 == 1)
+	while (i < len_arrays)
 	{
-		printf("0\n");
-		exit(0);
+		sum = carry + arr1[index_arrays] + arr2[index_arrays];
+		arr2[index_arrays] = sum % 10;
+		carry = sum / 10;
+		i++;
+		index_arrays--;
 	}
 }
 
+
 /**
- * _initialize_array - set memery to zero in a new array
- * @ar: char array.
- * @lar: length of the char array.
- *
- * Return: pointer of a char array.
+ * _isdigit - checks if a char is a digit
+ * @c: char to be checked
+ * Return: one success, zero otherwise
  */
-char *_initialize_array(char *ar, int lar)
+
+int _isdigit(char c)
+{
+	if (c >= '0' && c <= '9')
+	{
+		return (1);
+	}
+	printf("Error\n");
+	return (0);
+}
+
+
+/**
+ * multiply - multiply two numbers
+ * @n1: multiplier (smaller one)
+ * @l1: length of factor n1
+ * @n2: multiplicand (larger one)
+ * @l2: length of factor n2
+ * @lr: length of result array
+ * Return: one success, zero otherwise
+ */
+
+int *multiply(char *n1, int l1, char *n2, int l2, int lr)
+{
+	int i = 0;
+	int *final_result;
+	int *mult_result;
+	int multiplicand_digit_position;
+	int multiplier_digit_position = l1 - 1;
+	int digit;
+	int carry, value1, value2, product;
+
+	final_result = calloc(sizeof(int), lr);
+	while (i < l1)
+	{
+		mult_result = calloc(sizeof(int), lr);
+		multiplicand_digit_position = l2 - 1;
+		digit = lr - 1 - i; /*when doing a mult, we start from R to L*/
+		if (!_isdigit(n1[multiplier_digit_position]))
+		{
+			return (NULL);
+		}
+		carry = 0;
+		while (multiplicand_digit_position >= 0)
+		{
+			if (!_isdigit(n2[multiplicand_digit_position]))
+			{
+				return (NULL);
+			}
+			value1 = n1[multiplier_digit_position] - '0';
+			value2 = n2[multiplicand_digit_position] - '0';
+			product = value1 * value2;
+			product += carry;
+			mult_result[digit] += product % 10;
+			carry = product / 10;
+			digit--;
+			multiplicand_digit_position--;
+		}
+		add_arrays(mult_result, final_result, lr);
+		free(mult_result);
+		i++;
+		multiplier_digit_position--;
+	}
+	return (final_result);
+}
+
+
+/**
+ * print_result - print final array
+ * @result: pointer to final array
+ * @len_result: length fo the final array
+ */
+
+void print_result(int *result, int len_result)
 {
 	int i = 0;
 
-	for (i = 0; i < lar; i++)
-		ar[i] = '0';
-	ar[lar] = '\0';
-	return (ar);
+	while (result[i] == 0 && i < len_result)
+	{
+		i++;
+	}
+	if (i == len_result)
+	{
+		_putchar('0');
+	}
+	while (i < len_result)
+	{
+		_putchar(result[i++] + '0');
+	}
+	_putchar('\n');
 }
 
-/**
- * _checknum - determines length of the number
- * and checks if number is in base 10.
- * @argv: arguments vector.
- * @n: row of the array.
- *
- * Return: length of the number.
- */
-int _checknum(char *argv[], int n)
-{
-	int ln;
-
-	for (ln = 0; argv[n][ln]; ln++)
-		if (!isdigit(argv[n][ln]))
-		{
-			printf("Error\n");
-			exit(98);
-		}
-
-	return (ln);
-}
 
 /**
- * main - Entry point.
- * program that multiplies two positive numbers.
- * @argc: number of arguments.
- * @argv: arguments vector.
- *
- * Return: 0 - success.
+ * main - multiplies two positive numbers
+ * @argc: argument count
+ * @argv: argument vector
+ * Return: void
  */
+
 int main(int argc, char *argv[])
 {
-	int ln1, ln2, lnout, add, addl, i, j, k, ca;
-	char *nout;
+	int len_num1, len_num2, len_result;
+	char *num1, *num2;
+	int *result;
 
 	if (argc != 3)
-		printf("Error\n"), exit(98);
-	ln1 = _checknum(argv, 1), ln2 = _checknum(argv, 2);
-	_is_zero(argv), lnout = ln1 + ln2, nout = malloc(lnout + 1);
-	if (nout == NULL)
-		printf("Error\n"), exit(98);
-	nout = _initialize_array(nout, lnout);
-	k = lnout - 1, i = ln1 - 1, j = ln2 - 1, ca = addl = 0;
-	for (; k >= 0; k--, i--)
 	{
-		if (i < 0)
-		{
-			if (addl > 0)
-			{
-				add = (nout[k] - '0') + addl;
-				if (add > 9)
-					nout[k - 1] = (add / 10) + '0';
-				nout[k] = (add % 10) + '0';
-			}
-			i = ln1 - 1, j--, addl = 0, ca++, k = lnout - (1 + ca);
-		}
-		if (j < 0)
-		{
-			if (nout[0] != '0')
-				break;
-			lnout--;
-			free(nout), nout = malloc(lnout + 1), nout = _initialize_array(nout, lnout);
-			k = lnout - 1, i = ln1 - 1, j = ln2 - 1, ca = addl = 0;
-		}
-		if (j >= 0)
-		{
-			add = ((argv[1][i] - '0') * (argv[2][j] - '0')) + (nout[k] - '0') + addl;
-			addl = add / 10, nout[k] = (add % 10) + '0';
-		}
+		printf("Error\n");
+		exit(98);
 	}
-	printf("%s\n", nout);
+	len_num1 = strlen(argv[1]);
+	len_num2 = strlen(argv[2]);
+	len_result = len_num1 + len_num2;
+	if (len_num1 < len_num2)
+	{
+		num1 = argv[1];
+		num2 = argv[2];
+	}
+	else
+	{
+		num1 = argv[2];
+		num2 = argv[1];
+		len_num1 = strlen(argv[2]);
+		len_num2 = strlen(argv[1]);
+	}
+	result = multiply(num1, len_num1, num2, len_num2, len_result);
+	if (result == NULL)
+	{
+		exit(98);
+	}
+	print_result(result, len_result);
+
 	return (0);
 }
