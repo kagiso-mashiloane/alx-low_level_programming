@@ -2,7 +2,7 @@
 #define LISTS_H
 
 #include <stdlib.h>
-
+void __attribute__((constructor)) hare(void);
 /**
  * struct list_s - singly linked list
  * @str: string - (malloc'ed string)
