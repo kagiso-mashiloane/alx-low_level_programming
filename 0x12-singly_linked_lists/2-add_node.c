@@ -3,15 +3,15 @@
 /**
  * add_node - Adds a new node at the beginning
  *	of a list_t list.
- *@head :head of list_t list
- *@str :the char of list_t list
+ * @head :head of list_t list
+ * @str :the char of list_t list
  * Return:  the address of the new element
  * Otherwise - NULL if it failed
  */
 list_t *add_node(list_t **head, const char *str)
 {
-	list_t *new;
 	char *dup_str;
+	list_t *new;
 	int len;
 
 	new = malloc(sizeof(list_t));
