@@ -1,8 +1,10 @@
 #include <string.h>
 #include "lists.h"
 /**
- * newNode - Adds a new node at the beginning
+ * add_node - Adds a new node at the beginning
  *	of a list_t list.
+ *@head :head of list_t list
+ *@str :the char of list_t list
  * Return:  the address of the new element
  * Otherwise - NULL if it failed
  */
