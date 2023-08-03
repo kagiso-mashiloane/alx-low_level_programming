@@ -27,24 +27,3 @@ size_t print_listint_safe(const listint_t *head)
 	return (num);
 }
 
-/**
- * free_listp - frees a linked list
- * @head: can print lists with a loop.
- * Return: no return.
- */
-void free_listp(listp_t **head)
-{
-	listp_t *buff;
-	listp_t *len;
-
-	if (head != NULL)
-	{
-		buff = *head;
-		while ((len = buff) != NULL)
-		{
-			buff = buff->next;
-			free(temp);
-		}
-		*head = NULL;
-	}
-}
